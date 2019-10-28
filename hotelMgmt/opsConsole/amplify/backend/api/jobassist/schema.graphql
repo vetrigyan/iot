@@ -1,0 +1,24 @@
+type Listing @model {
+  id: ID!
+  title: String!
+  company: String!
+  url: String!
+  status: Status!
+  favorite: Boolean!
+  notes: String
+  relatedDate: String
+  contactName: String
+  contactEmail: String
+  contactPhoneNumber: String
+  createdAt: String
+  updatedAt: String
+}
+
+enum Status {
+  APPLIED
+  TRACKING
+  INTERVIEWING
+  TAKE_HOME_ASSIGNMENT
+}
+
+
