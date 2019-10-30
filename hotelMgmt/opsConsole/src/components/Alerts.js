@@ -2,19 +2,12 @@ import React, { useState, useEffect } from "react";
 import { API, graphqlOperation } from "aws-amplify";
 import styled from "@emotion/styled";
 
-import Listing from "./Listing";
-import TrackListing from "./Track-Listing";
-import { listListings } from "../graphql/queries";
+import Listing from "./Alert";
+import { listAlerts } from "../graphql/queries";
 import {
-  createListing,
-  deleteListing,
-  updateListing
-} from "../graphql/mutations";
-
-import {
-  onCreateListing,
-  onUpdateListing,
-  onDeleteListing
+  onCreateAlert,
+  onUpdateAlert,
+  onDeleteAlert
 } from "../graphql/subscriptions";
 
 const Container = styled("div")`
@@ -30,10 +23,12 @@ export default () => {
   const [listings, setListings] = useState([]);
   
   useEffect(() => {
-    API.graphql(graphqlOperation(listListings))
+    API.graphql(graphqlOperation(listAlerts))
       .then(result => {
+          console.log("Invoked listAlerts callback " + result.data.listAlerts.items[0]);  
         setListings(
-          result.data.listListings.items.sort((a, b) => {
+          result.data.listAlerts.items.sort((a, b) => {
+          console.log("Invoked listAlerts callback a.type=" + a.type + ", b.type=" + b.type);  
             if (a.updatedAt > b.updatedAt) return -1;
             else return 1;
           })
@@ -42,13 +37,13 @@ export default () => {
       .catch(error => {
         console.log(error);
       });
-  API.graphql(graphqlOperation(onCreateListing)).subscribe({
+  API.graphql(graphqlOperation(onCreateAlert)).subscribe({
       next: (e) => {
           setListings(prevValue => {
-          console.log("Invoked onCreateListing Subcription callback " + e.value.data.onCreateListing.title);  
+          console.log("Invoked onCreateAlert Subcription callback " + e.value.data.onCreateAlert.title);  
           let ids = new Map();
           let updatedListings = prevValue;
-          updatedListings.push(e.value.data.onCreateListing);
+          updatedListings.push(e.value.data.onCreateAlert);
                   updatedListings = updatedListings.filter(l => {
                   if (ids.has(l.id)) {
                     console.log("Duplicate listing found, handling it with id= " + l.id + ", title=" + l.title);
@@ -72,13 +67,13 @@ export default () => {
           });
       }
     });
-  API.graphql(graphqlOperation(onUpdateListing)).subscribe({
+  API.graphql(graphqlOperation(onUpdateAlert)).subscribe({
       next: (e) => {
           setListings(prevValue => {
-          console.log("Invoked onUpdateListing Subscription callback " + e.value.data.onUpdateListing.title);  
+          console.log("Invoked onUpdateListing Subscription callback " + e.value.data.onUpdateAlert.title);  
                 const updatedListings = prevValue.map(l => {
-                  if (l.id === e.value.data.onUpdateListing.id) {
-                    return e.value.data.onUpdateListing;
+                  if (l.id === e.value.data.onUpdateAlert.id) {
+                    return e.value.data.onUpdateAlert;
                   }
 
                   return l;
@@ -87,12 +82,12 @@ export default () => {
           });
       }
     });
-  API.graphql(graphqlOperation(onDeleteListing)).subscribe({
+  API.graphql(graphqlOperation(onDeleteAlert)).subscribe({
       next: (e) => {
           setListings(prevValue => {
-          console.log("Invoked onDeleteListing Subscription callback " + e.value.data.onDeleteListing.title);  
+          console.log("Invoked onDeleteListing Subscription callback " + e.value.data.onDeleteAlert.title);  
                 const updatedListings = prevValue.filter(l => {
-                  return l.id !== e.value.data.onDeleteListing.id;
+                  return l.id !== e.value.data.onDeleteAlert.id;
                 });
                 return updatedListings;
           });
@@ -102,77 +97,11 @@ export default () => {
 
   return (
     <Container>
-      <TrackListing
-        onSave={values => {
-          API.graphql(
-            graphqlOperation(createListing, {
-              input: values
-            })
-          ).then(result => {
-            setListings([result.data.createListing, ...listings]);
-          });
-        }}
-      />
       <Listings>
         {listings.map(listing => (
           <Listing
             key={listing.id}
-            listing={listing}
-            onSaveChanges={values => {
-              API.graphql(
-                graphqlOperation(updateListing, {
-                  input: {
-                    ...listing,
-                    ...values
-                  }
-                })
-              ).then(result => {
-                const updatedListings = listings.map(l => {
-                  if (l.id === result.data.updateListing.id) {
-                    return result.data.updateListing;
-                  }
-
-                  return l;
-                });
-
-                setListings(updatedListings);
-              });
-            }}
-            onFavorite={() => {
-              API.graphql(
-                graphqlOperation(updateListing, {
-                  input: {
-                    ...listing,
-                    favorite: !listing.favorite
-                  }
-                })
-              ).then(result => {
-                const updatedListings = listings.map(l => {
-                  if (l.id === result.data.updateListing.id) {
-                    return result.data.updateListing;
-                  }
-
-                  return l;
-                });
-
-                setListings(updatedListings);
-              });
-            }}
-            onDelete={() => {
-              if (window.confirm("Are you sure want to delete this listing?")) {
-                API.graphql(
-                  graphqlOperation(deleteListing, {
-                    input: { id: listing.id }
-                  })
-                ).then(result => {
-                  const updatedListings = listings.filter(
-                    l => l.id !== result.data.deleteListing.id
-                  );
-
-                  setListings(updatedListings);
-                });
-              }
-            }}
+            alert={listing}
           />
         ))}
       </Listings>

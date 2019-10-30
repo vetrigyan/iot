@@ -15,5 +15,22 @@
                 "jobassist8b1be0cb": {}
             }
         }
+    },
+    "hotelmgmt": {
+        "awscloudformation": {
+            "AuthRoleName": "job-assist-hotelmgmt-20191028145641-authRole",
+            "UnauthRoleArn": "arn:aws:iam::206982232731:role/job-assist-hotelmgmt-20191028145641-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::206982232731:role/job-assist-hotelmgmt-20191028145641-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "job-assist-hotelmgmt-20191028145641-deployment",
+            "UnauthRoleName": "job-assist-hotelmgmt-20191028145641-unauthRole",
+            "StackName": "job-assist-hotelmgmt-20191028145641",
+            "StackId": "arn:aws:cloudformation:us-east-1:206982232731:stack/job-assist-hotelmgmt-20191028145641/269e7b60-f993-11e9-a1fa-0e660dd6b3d4"
+        },
+        "categories": {
+            "auth": {
+                "jobassist8b1be0cb": {}
+            }
+        }
     }
 }

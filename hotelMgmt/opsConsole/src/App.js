@@ -4,7 +4,7 @@ import { Authenticator } from "aws-amplify-react";
 import styled from "@emotion/styled";
 
 import awsExports from "./aws-exports";
-import Listings from "./components/Listings";
+import Alerts from "./components/OpsConsole";
 
 const Title = styled("h1")`
   text-align: center;
@@ -61,7 +61,7 @@ function App() {
   }, []);
 
   return state.isLoggedIn ? (
-    <Listings />
+    <Alerts />
   ) : (
     <>
       <Title>Journey</Title>

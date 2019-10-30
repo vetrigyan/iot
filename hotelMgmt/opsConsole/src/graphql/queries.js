@@ -1,42 +1,57 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getListing = `query GetListing($id: ID!) {
-  getListing(id: $id) {
+export const getSensorRoomData = `query GetSensorRoomData($id: ID!) {
+  getSensorRoomData(id: $id) {
+    sensorId
+    flowRate
+    roomId
+    occupied
+  }
+}
+`;
+export const listSensorRoomDatas = `query ListSensorRoomDatas(
+  $filter: ModelSensorRoomDataFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listSensorRoomDatas(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      sensorId
+      flowRate
+      roomId
+      occupied
+    }
+    nextToken
+  }
+}
+`;
+export const getAlert = `query GetAlert($id: ID!) {
+  getAlert(id: $id) {
     id
+    sourceObject
+    type
+    severity
     title
-    company
-    url
-    status
-    favorite
     notes
-    relatedDate
-    contactName
-    contactEmail
-    contactPhoneNumber
     createdAt
     updatedAt
   }
 }
 `;
-export const listListings = `query ListListings(
-  $filter: ModelListingFilterInput
+export const listAlerts = `query ListAlerts(
+  $filter: ModelAlertFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listListings(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listAlerts(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
+      sourceObject
+      type
+      severity
       title
-      company
-      url
-      status
-      favorite
       notes
-      relatedDate
-      contactName
-      contactEmail
-      contactPhoneNumber
       createdAt
       updatedAt
     }

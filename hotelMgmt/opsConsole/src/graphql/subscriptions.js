@@ -1,55 +1,67 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateListing = `subscription OnCreateListing {
-  onCreateListing {
+export const onCreateSensorRoomData = `subscription OnCreateSensorRoomData {
+  onCreateSensorRoomData {
+    sensorId
+    flowRate
+    roomId
+    occupied
+  }
+}
+`;
+export const onUpdateSensorRoomData = `subscription OnUpdateSensorRoomData {
+  onUpdateSensorRoomData {
+    sensorId
+    flowRate
+    roomId
+    occupied
+  }
+}
+`;
+export const onDeleteSensorRoomData = `subscription OnDeleteSensorRoomData {
+  onDeleteSensorRoomData {
+    sensorId
+    flowRate
+    roomId
+    occupied
+  }
+}
+`;
+export const onCreateAlert = `subscription OnCreateAlert {
+  onCreateAlert {
     id
+    sourceObject
+    type
+    severity
     title
-    company
-    url
-    status
-    favorite
     notes
-    relatedDate
-    contactName
-    contactEmail
-    contactPhoneNumber
     createdAt
     updatedAt
   }
 }
 `;
-export const onUpdateListing = `subscription OnUpdateListing {
-  onUpdateListing {
+export const onUpdateAlert = `subscription OnUpdateAlert {
+  onUpdateAlert {
     id
+    sourceObject
+    type
+    severity
     title
-    company
-    url
-    status
-    favorite
     notes
-    relatedDate
-    contactName
-    contactEmail
-    contactPhoneNumber
     createdAt
     updatedAt
   }
 }
 `;
-export const onDeleteListing = `subscription OnDeleteListing {
-  onDeleteListing {
+export const onDeleteAlert = `subscription OnDeleteAlert {
+  onDeleteAlert {
     id
+    sourceObject
+    type
+    severity
     title
-    company
-    url
-    status
-    favorite
     notes
-    relatedDate
-    contactName
-    contactEmail
-    contactPhoneNumber
     createdAt
     updatedAt
   }
