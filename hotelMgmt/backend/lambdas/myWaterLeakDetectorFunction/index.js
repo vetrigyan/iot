@@ -117,6 +117,7 @@ let createAlarm = function (sensorId, roomId, alarmType) {
         client.mutate({ mutation: createAlert, variables: { input: vari } })
             .then(function logData(data) {
                 console.log('(Mutate): Created Alert Data ----------->', data);
+                postAlertMessage(sensorId, roomId, alarmType, true);
             })
             .catch(console.error);
 
@@ -136,6 +137,7 @@ let deleteAlarm = function (sensorId, roomId, alarmType) {
         client.mutate({ mutation: deleteAlert, variables: { input: vari } })
             .then(function logData(data) {
                 console.log('(Mutate): Deleted Alert  ----------->', data);
+                postAlertMessage(sensorId, roomId, alarmType, false);
             })
             .catch(console.error);
 
