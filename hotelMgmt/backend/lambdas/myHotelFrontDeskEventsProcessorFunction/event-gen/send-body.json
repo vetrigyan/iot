@@ -5,7 +5,7 @@
             "receiptHandle": "AQEBwJnKyrHigUMZj6rYigCgxlaS3SLy0a...",
             "body": {
                 "roomOccupancyStatus": {
-                    "roomCheckInStatus": 1,
+                    "roomCheckInStatus": 0,
                     "roomId": 101
              },
             "attributes": {
