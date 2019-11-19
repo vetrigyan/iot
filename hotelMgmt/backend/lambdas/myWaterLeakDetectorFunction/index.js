@@ -151,14 +151,14 @@ let postAlertMessage = function (sensorId, roomId, alarmType, isRaised) {
     if (isRaised) {
         subject = 'Critical Issue at Hotel Aria room number ' + roomId;
         if (alarmType == ALARM_TYPE_WATERLEAK) {
-            message = '\n\nWater leak detected';
+            message = '\n\nWater leak detected in Hotel Aria room number ' + roomId;
         } else {
             message = '\n\nSome issue detected';
         }
     } else {
         subject = 'Issue Resolved at Hotel Aria room number ' + roomId;
         if (alarmType == ALARM_TYPE_WATERLEAK) {
-            message = '\n\nWater leak has stopped';
+            message = '\n\nWater leak has stopped in Hotel Aria room number ' + roomId;
         } else {
             message = '\n\nIssue is resolved';
         }
