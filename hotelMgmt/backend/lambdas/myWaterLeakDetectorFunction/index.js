@@ -58,7 +58,7 @@ let isFlowing = function (newFlowrate) {
     //var flow = parseInt(newFlowrate);
     //var flowRate = Number(parseInt(newFlowrate));
     //console.log('Flowrate is' + flow + ', ' + typeof(flow));
-    if (50 < newFlowrate) {
+    if (newFlowrate == 100) {
         console.log("There IS flow");
         return true;
     }
