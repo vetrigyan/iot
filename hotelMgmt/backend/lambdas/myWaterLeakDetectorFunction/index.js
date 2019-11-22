@@ -108,7 +108,7 @@ let createAlarm = function (sensorId, roomId, alarmType) {
         sourceObject: sensorId,
         type: alarmType,
         severity: "CRITICAL",
-        title: "Serious issue in Room number: " + roomId,
+        title: "Serious issue in Room number " + roomId,
         notes: "Needs immediate action from personnel!!!"
     };
 
